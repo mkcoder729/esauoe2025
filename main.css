@@ -1,4 +1,4 @@
-     /* === ROOT VARIABLES === */
+     /* === ROOT VARIABLES === */     /* === ROOT VARIABLES === */
         :root {
             --primary-dark: #3E2723;
             --primary-medium: #5D4037;
@@ -1854,56 +1854,58 @@
                         color: var(--white);
                         position: relative;
                         overflow: hidden;
-                        padding: clamp(60px, 8vw, 100px) 0;
+                        padding: 100px 0;
                     }
-
+                    
                     .departments-mega::before {
                         content: '';
                         position: absolute;
                         top: -200px;
                         right: -200px;
-                        width: min(500px, 80vw);
-                        height: min(500px, 80vw);
+                        width: 500px;
+                        height: 500px;
                         background: rgba(255, 255, 255, 0.05);
                         border-radius: 50%;
                     }
-
+                    
                     .departments-mega::after {
                         content: '';
                         position: absolute;
                         bottom: -200px;
                         left: -200px;
-                        width: min(500px, 80vw);
-                        height: min(500px, 80vw);
+                        width: 500px;
+                        height: 500px;
                         background: rgba(255, 255, 255, 0.05);
                         border-radius: 50%;
                     }
-
+                    
                     .departments-mega .section-title h2 {
                         color: #ffffff;
                         font-size: clamp(2rem, 5vw, 3rem);
-                        margin-bottom: clamp(10px, 2vw, 15px);
+                        margin-bottom: 15px;
+                        text-align: center;
                     }
-
+                    
                     .departments-mega .section-title p {
                         color: #cbd5e0;
                         font-size: clamp(1rem, 2vw, 1.2rem);
+                        text-align: center;
                     }
-
+                    
                     .departments-grid-mega {
                         display: grid;
-                        grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
-                        gap: clamp(25px, 4vw, 40px);
+                        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+                        gap: 40px;
                         position: relative;
                         z-index: 2;
                     }
-
+                    
                     /* Department Cards - Unique Styling for Each */
                     .department-card-mega {
                         background: rgba(255, 255, 255, 0.1);
                         backdrop-filter: blur(10px);
                         border-radius: 20px;
-                        padding: clamp(25px, 4vw, 40px) clamp(20px, 3vw, 30px);
+                        padding: 40px 30px;
                         text-align: center;
                         transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
                         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
@@ -1912,7 +1914,7 @@
                         overflow: hidden;
                         cursor: pointer;
                     }
-
+                    
                     .department-card-mega::before {
                         content: '';
                         position: absolute;
@@ -1922,343 +1924,146 @@
                         height: 5px;
                         transition: all 0.4s ease;
                     }
-
+                    
                     /* Civil Department - Blue Theme */
                     .civil-department::before {
                         background: linear-gradient(90deg, #3498db, #2980b9);
                     }
-
+                    
                     .civil-department:hover {
                         transform: translateY(-15px) scale(1.02);
                         box-shadow: 0 20px 40px rgba(52, 152, 219, 0.3);
                         border-color: rgba(52, 152, 219, 0.4);
                     }
-
+                    
                     /* Mechanical Department - Red Theme */
                     .mechanical-department::before {
                         background: linear-gradient(90deg, #e74c3c, #c0392b);
                     }
-
+                    
                     .mechanical-department:hover {
                         transform: translateY(-15px) scale(1.02);
                         box-shadow: 0 20px 40px rgba(231, 76, 60, 0.3);
                         border-color: rgba(231, 76, 60, 0.4);
                     }
-
+                    
                     /* Electrical Department - Yellow Theme */
                     .electrical-department::before {
                         background: linear-gradient(90deg, #f39c12, #e67e22);
                     }
-
+                    
                     .electrical-department:hover {
                         transform: translateY(-15px) scale(1.02);
                         box-shadow: 0 20px 40px rgba(243, 156, 18, 0.3);
                         border-color: rgba(243, 156, 18, 0.4);
                     }
-
+                    
                     /* Agricultural Department - Green Theme */
                     .agricultural-department::before {
                         background: linear-gradient(90deg, #27ae60, #2ecc71);
                     }
-
+                    
                     .agricultural-department:hover {
                         transform: translateY(-15px) scale(1.02);
                         box-shadow: 0 20px 40px rgba(39, 174, 96, 0.3);
                         border-color: rgba(39, 174, 96, 0.4);
                     }
-
+                    
                     .department-icon-mega {
-                        font-size: clamp(3rem, 6vw, 4rem);
-                        margin-bottom: clamp(15px, 3vw, 25px);
+                        font-size: 4rem;
+                        margin-bottom: 25px;
                         display: inline-block;
                         transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
                         filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
                     }
-
+                    
                     .civil-department .department-icon-mega {
                         color: #3498db;
                     }
-
+                    
                     .mechanical-department .department-icon-mega {
                         color: #e74c3c;
                     }
-
+                    
                     .electrical-department .department-icon-mega {
                         color: #f39c12;
                     }
-
+                    
                     .agricultural-department .department-icon-mega {
                         color: #27ae60;
                     }
-
+                    
                     .department-card-mega:hover .department-icon-mega {
                         transform: scale(1.2) rotate(5deg);
                     }
-
+                    
                     .department-card-mega h3 {
-                        font-size: clamp(1.4rem, 3vw, 1.8rem);
-                        margin-bottom: clamp(15px, 3vw, 20px);
+                        font-size: 1.8rem;
+                        margin-bottom: 20px;
                         font-weight: 700;
                         color: #ffffff;
                     }
-
+                    
                     .department-card-mega p {
-                        margin-bottom: clamp(20px, 3vw, 25px);
+                        margin-bottom: 25px;
                         opacity: 0.9;
-                        font-size: clamp(0.95rem, 2vw, 1.1rem);
+                        font-size: 1.1rem;
                         line-height: 1.6;
                         color: #e2e8f0;
                     }
-
+                    
                     .btn {
                         display: inline-block;
-                        padding: clamp(10px, 2vw, 12px) clamp(20px, 3vw, 30px);
+                        padding: 12px 30px;
                         border-radius: 50px;
                         text-decoration: none;
                         font-weight: 600;
                         cursor: pointer;
                         transition: all 0.3s ease;
                         border: none;
-                        font-size: clamp(0.9rem, 2vw, 1rem);
+                        font-size: 1rem;
                     }
-
+                    
                     .btn-gold {
                         background: linear-gradient(135deg, #e6b400, #ffd700);
                         color: #1a365d;
                         box-shadow: 0 4px 15px rgba(230, 180, 0, 0.3);
                     }
-
+                    
                     .btn-gold:hover {
                         transform: translateY(-3px);
                         box-shadow: 0 7px 20px rgba(230, 180, 0, 0.4);
                     }
-
+                    
                     .btn-outline {
                         background: transparent;
                         border: 2px solid #e6b400;
                         color: #e6b400;
                     }
-
+                    
                     .btn-outline:hover {
                         background: #e6b400;
                         color: #1a365d;
                     }
-
-                    /* Enhanced Responsive Design */
-                    @media (max-width: 1200px) {
-                        .departments-grid-mega {
-                            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
-                        }
-                    }
-
+                    
+                    /* Only make the section title responsive */
                     @media (max-width: 768px) {
-                        .departments-grid-mega {
-                            grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
-                            gap: 20px;
-                        }
-
-                        .department-card-mega {
-                            padding: 25px 20px;
-                        }
-
-                        .department-card-mega:hover {
-                            transform: translateY(-8px) scale(1.02);
-                        }
-                    }
-
-                    @media (max-width: 576px) {
-                        .departments-mega {
-                            padding: 40px 0;
-                        }
-
-                        .departments-grid-mega {
-                            grid-template-columns: 1fr;
-                            gap: 20px;
-                        }
-
-                        .department-card-mega {
-                            padding: 20px 15px;
-                        }
-
-                        .department-card-mega:hover {
-                            transform: translateY(-5px) scale(1.01);
-                        }
-
-                        .department-icon-mega {
-                            font-size: 2.5rem;
-                            margin-bottom: 15px;
-                        }
-
-                        .department-card-mega h3 {
-                            font-size: 1.3rem;
-                            margin-bottom: 15px;
-                        }
-
-                        .department-card-mega p {
-                            font-size: 0.9rem;
-                            margin-bottom: 20px;
-                        }
-
-                        .btn {
-                            width: 100%;
-                            text-align: center;
-                        }
-                    }
-
-                    /* Samsung S8+ and Small Screen Optimizations */
-                    @media (max-width: 360px) {
-                        .departments-mega {
-                            padding: 30px 0;
-                        }
-
-                        .departments-grid-mega {
-                            gap: 15px;
-                        }
-
-                        .department-card-mega {
-                            padding: 15px 12px;
-                        }
-
-                        .department-icon-mega {
-                            font-size: 2rem;
-                            margin-bottom: 12px;
-                        }
-
-                        .department-card-mega h3 {
-                            font-size: 1.2rem;
-                            margin-bottom: 12px;
-                        }
-
-                        .department-card-mega p {
-                            font-size: 0.85rem;
-                            margin-bottom: 15px;
-                        }
-
-                        .btn {
-                            padding: 8px 16px;
-                            font-size: 0.85rem;
-                        }
-                    }
-
-                    /* Very small screens */
-                    @media (max-width: 320px) {
                         .departments-mega .section-title h2 {
-                            font-size: 1.6rem;
+                            font-size: 2.2rem;
                         }
-
+                    
                         .departments-mega .section-title p {
-                            font-size: 0.9rem;
+                            font-size: 1rem;
                         }
-
-                        .department-card-mega {
-                            padding: 12px 10px;
-                        }
-
-                        .department-icon-mega {
+                    }
+                    
+                    @media (max-width: 480px) {
+                        .departments-mega .section-title h2 {
                             font-size: 1.8rem;
                         }
-
-                        .department-card-mega h3 {
-                            font-size: 1.1rem;
-                        }
-
-                        .department-card-mega p {
-                            font-size: 0.8rem;
-                        }
-                    }
-
-                    /* Touch device optimizations */
-                    @media (hover: none) and (pointer: coarse) {
-                        .department-card-mega:hover {
-                            transform: none;
-                        }
-
-                        .department-card-mega:hover .department-icon-mega {
-                            transform: none;
-                        }
-
-                        .btn-gold:hover,
-                        .btn-outline:hover {
-                            transform: none;
-                        }
-
-                        /* Add active states for touch devices */
-                        .department-card-mega:active {
-                            transform: scale(0.98);
-                        }
-
-                        .btn-gold:active,
-                        .btn-outline:active {
-                            transform: scale(0.95);
-                        }
-                    }
-
-                    /* High DPI screens optimization */
-                    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-                        .department-card-mega {
-                            border-width: 0.5px;
-                        }
-                    }
-
-                    /* Reduced motion support */
-                    @media (prefers-reduced-motion: reduce) {
-                        .department-card-mega,
-                        .department-icon-mega,
-                        .btn-gold,
-                        .btn-outline {
-                            transition: none;
-                            animation: none;
-                        }
-
-                        .department-card-mega:hover,
-                        .department-card-mega:hover .department-icon-mega,
-                        .btn-gold:hover,
-                        .btn-outline:hover {
-                            transform: none;
-                        }
-                    }
-
-                    /* Landscape orientation for mobile */
-                    @media (max-height: 500px) and (orientation: landscape) {
-                        .departments-mega {
-                            padding: 30px 0;
-                        }
-
-                        .departments-grid-mega {
-                            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                            gap: 15px;
-                        }
-
-                        .department-card-mega {
-                            padding: 15px 10px;
-                        }
-
-                        .department-icon-mega {
-                            font-size: 2rem;
-                            margin-bottom: 10px;
-                        }
-
-                        .department-card-mega h3 {
-                            font-size: 1.1rem;
-                            margin-bottom: 8px;
-                        }
-
-                        .department-card-mega p {
-                            font-size: 0.8rem;
-                            margin-bottom: 12px;
-                            line-height: 1.4;
-                        }
-                    }
-
-                    /* Large screens optimization */
-                    @media (min-width: 1600px) {
-                        .departments-grid-mega {
-                            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-                            gap: 50px;
-                        }
-
-                        .department-card-mega {
-                            padding: 50px 40px;
+                    
+                        .departments-mega .section-title p {
+                            font-size: 0.9rem;
                         }
                     }
 
@@ -8533,4 +8338,4 @@
                 animation: none;
                 transform: translateY(-3px);
             }
-        }
+                 }
