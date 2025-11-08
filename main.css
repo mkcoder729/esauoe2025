@@ -1,4 +1,4 @@
-     /* === ROOT VARIABLES === */     /* === ROOT VARIABLES === */
+     /* === ROOT VARIABLES === */
         :root {
             --primary-dark: #3E2723;
             --primary-medium: #5D4037;
@@ -8338,4 +8338,4 @@
                 animation: none;
                 transform: translateY(-3px);
             }
-                 }
+        }
