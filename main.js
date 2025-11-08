@@ -1999,7 +1999,7 @@
 
                 // State
                 let currentDocuments = [...sampleDocuments];
-                let visibleCount = 6;
+                let visibleCount = 8;
                 let filteredDocuments = [...sampleDocuments];
                 let hasAnimatedStats = false; // Track if stats have been animated
 
@@ -2352,7 +2352,7 @@
 
                 // Simulate loading delay
                 setTimeout(() => {
-                    visibleCount += 6;
+                    visibleCount += 4;
                     renderDocuments();
 
                     // Restore button state
