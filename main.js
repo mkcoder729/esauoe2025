@@ -3593,10 +3593,12 @@
 
 
 
+
             // Partners Infinite Scrolling with Perfect Loop
             document.addEventListener('DOMContentLoaded', function() {
                 initPartnersSlider();
                 initImageLoading();
+                initDonateModal();
             });
 
             function initPartnersSlider() {
@@ -3619,11 +3621,11 @@
 
                 let animationId;
                 let position = 0;
-                const speed = 1.2; // Adjust speed here
+                const speed = 1.2;
                 let isPaused = false;
                 const logoWidth = 300;
                 const gap = 40;
-                const totalLogos = 6; // Original number of logos
+                const totalLogos = 7; // Updated to 7 with University of Eldoret
                 const singleSetWidth = (logoWidth + gap) * totalLogos;
 
                 function animate() {
@@ -3689,6 +3691,329 @@
                     }
                 });
             }
+
+            // Donate Modal Functionality
+            function initDonateModal() {
+                const donateBtn = document.getElementById('donateBtn');
+                const donateModal = document.getElementById('donateModal');
+                const donateForm = document.getElementById('donateForm');
+                const closeBtn = document.querySelector('.donate-modal-mega .modal-close-mega');
+                const cancelBtn = document.getElementById('donateCancel');
+                const backdrop = document.querySelector('.donate-modal-mega .modal-backdrop-mega');
+
+                if (!donateBtn || !donateModal) return;
+
+                // Open modal
+                donateBtn.addEventListener('click', () => {
+                    donateModal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+
+                // Close modal functions
+                function closeModal() {
+                    donateModal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+
+                closeBtn.addEventListener('click', closeModal);
+                cancelBtn.addEventListener('click', closeModal);
+                backdrop.addEventListener('click', closeModal);
+
+                // Close on Escape key
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && donateModal.classList.contains('active')) {
+                        closeModal();
+                    }
+                });
+
+                // Form submission
+                donateForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+
+                    // Validate form
+                    if (!validateDonateForm()) {
+                        return;
+                    }
+
+                    // Get form data
+                    const formData = {
+                        name: document.getElementById('donateName').value.trim(),
+                        email: document.getElementById('donateEmail').value.trim(),
+                        phone: document.getElementById('donatePhone').value.trim(),
+                        organization: document.getElementById('donateOrganization').value.trim(),
+                        type: document.getElementById('donateType').value,
+                        amount: document.getElementById('donateAmount').value.trim(),
+                        purpose: document.getElementById('donatePurpose').value,
+                        message: document.getElementById('donateMessage').value.trim(),
+                        timeline: document.getElementById('donateTimeline').value,
+                        callSchedule: document.getElementById('donateCall').value,
+                        submittedAt: new Date().toISOString()
+                    };
+
+                    // Show loading state
+                    const submitBtn = donateForm.querySelector('.btn-gold-mega');
+                    const originalText = submitBtn.innerHTML;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+                    submitBtn.disabled = true;
+
+                    try {
+                        // Simulate API call
+                        await submitDonateForm(formData);
+
+                        // Show success message
+                        showDonateSuccess(formData);
+
+                        // Reset form
+                        donateForm.reset();
+
+                        // Close modal after success
+                        setTimeout(() => {
+                            closeModal();
+                        }, 3000);
+
+                    } catch (error) {
+                        showDonateError();
+                    } finally {
+                        // Reset button
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                    }
+                });
+
+                // Form validation
+                function validateDonateForm() {
+                    const requiredFields = [
+                        'donateName',
+                        'donateEmail',
+                        'donatePhone',
+                        'donateType',
+                        'donateMessage',
+                        'donateCall'
+                    ];
+
+                    let isValid = true;
+
+                    requiredFields.forEach(fieldId => {
+                        const field = document.getElementById(fieldId);
+                        const value = field.value.trim();
+
+                        if (!value) {
+                            field.style.borderColor = '#e74c3c';
+                            isValid = false;
+                        } else {
+                            field.style.borderColor = '#e0e0e0';
+                        }
+
+                        // Email validation
+                        if (fieldId === 'donateEmail' && value) {
+                            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                            if (!emailRegex.test(value)) {
+                                field.style.borderColor = '#e74c3c';
+                                isValid = false;
+                            }
+                        }
+                    });
+
+                    if (!isValid) {
+                        showNotification('Please fill in all required fields correctly.', 'error');
+                    }
+
+                    return isValid;
+                }
+
+                // Clear field errors on input
+                donateForm.querySelectorAll('input, select, textarea').forEach(field => {
+                    field.addEventListener('input', () => {
+                        field.style.borderColor = '#e0e0e0';
+                    });
+                });
+            }
+
+            // Simulate form submission
+            async function submitDonateForm(formData) {
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        // Simulate 95% success rate
+                        if (Math.random() > 0.05) {
+                            // In real implementation, this would send data to your backend
+                            console.log('Donation form submitted:', formData);
+
+                            // Simulate sending email notification
+                            simulateEmailNotification(formData);
+
+                            resolve(formData);
+                        } else {
+                            reject(new Error('Submission failed'));
+                        }
+                    }, 2000);
+                });
+            }
+
+            // Simulate email notification
+            function simulateEmailNotification(formData) {
+                const emailContent = `
+                    Dear ${formData.name},
+
+                    Thank you for your interest in supporting the Engineering Students Association (ESA) community!
+
+                    We have received your donation inquiry with the following details:
+                    - Support Type: ${formData.type}
+                    - Estimated Value: ${formData.amount || 'Not specified'}
+                    - Preferred Purpose: ${formData.purpose || 'General Support'}
+                    - Timeline: ${formData.timeline || 'Flexible'}
+
+                    We appreciate your willingness to support engineering education and development. Our team will contact you within 24-48 hours at ${formData.phone} to discuss the next steps and coordinate the donation process.
+
+                    Preferred Call Schedule: ${getCallScheduleText(formData.callSchedule)}
+
+                    If you have any immediate questions, please don't hesitate to reply to this email.
+
+                    Thank you for making a difference in the engineering community!
+
+                    Warm regards,
+                    ESA Team
+                    Engineering Students Association
+                    University of Eldoret
+                    esauoe@uoeld.ac.ke
+                `;
+
+                console.log('Email would be sent:', emailContent);
+            }
+
+            function getCallScheduleText(schedule) {
+                const schedules = {
+                    'morning': 'Weekday Mornings (8AM - 12PM)',
+                    'afternoon': 'Weekday Afternoons (2PM - 5PM)',
+                    'evening': 'Weekday Evenings (6PM - 8PM)',
+                    'saturday': 'Saturday Morning (9AM - 12PM)',
+                    'flexible': 'Flexible - We will coordinate via email'
+                };
+                return schedules[schedule] || schedule;
+            }
+
+            function showDonateSuccess(formData) {
+                showNotification(
+                    `Thank you, ${formData.name}! Your donation inquiry has been submitted successfully. We'll contact you within 24-48 hours to discuss next steps and schedule the call.`,
+                    'success'
+                );
+            }
+
+            function showDonateError() {
+                showNotification(
+                    'Sorry, there was an error submitting your donation inquiry. Please try again or contact us directly at esauoe@uoeld.ac.ke',
+                    'error'
+                );
+            }
+
+            // Notification system
+            function showNotification(message, type) {
+                // Remove existing notification
+                const existingNotification = document.querySelector('.donate-notification');
+                if (existingNotification) {
+                    existingNotification.remove();
+                }
+
+                // Create new notification
+                const notification = document.createElement('div');
+                notification.className = `donate-notification ${type}`;
+                notification.innerHTML = `
+                    <div class="notification-content">
+                        <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
+                        <span>${message}</span>
+                    </div>
+                    <button class="notification-close">&times;</button>
+                `;
+
+                // Add styles
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: ${type === 'success' ? '#27ae60' : '#e74c3c'};
+                    color: white;
+                    padding: 20px 25px;
+                    border-radius: 12px;
+                    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                    z-index: 10001;
+                    display: flex;
+                    align-items: center;
+                    gap: 15px;
+                    max-width: 500px;
+                    animation: slideInRight 0.3s ease;
+                    font-size: 0.95rem;
+                    line-height: 1.4;
+                `;
+
+                notification.querySelector('.notification-close').addEventListener('click', () => {
+                    notification.remove();
+                });
+
+                document.body.appendChild(notification);
+
+                // Auto remove after 8 seconds for success, 6 for error
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.remove();
+                    }
+                }, type === 'success' ? 8000 : 6000);
+            }
+
+            // Add notification styles
+            const donateStyles = `
+                @keyframes slideInRight {
+                    from {
+                        transform: translateX(100%);
+                        opacity: 0;
+                    }
+                    to {
+                        transform: translateX(0);
+                        opacity: 1;
+                    }
+                }
+
+                .donate-notification .notification-content {
+                    display: flex;
+                    align-items: flex-start;
+                    gap: 12px;
+                    flex: 1;
+                }
+
+                .donate-notification .notification-close {
+                    background: none;
+                    border: none;
+                    color: white;
+                    font-size: 1.3rem;
+                    cursor: pointer;
+                    padding: 0;
+                    width: 25px;
+                    height: 25px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: opacity 0.2s ease;
+                    flex-shrink: 0;
+                }
+
+                .donate-notification .notification-close:hover {
+                    opacity: 0.8;
+                }
+
+                .fa-spin {
+                    animation: fa-spin 1s infinite linear;
+                }
+
+                @keyframes fa-spin {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); }
+                }
+            `;
+
+            // Inject styles
+            const styleSheet = document.createElement('style');
+            styleSheet.textContent = donateStyles;
+            document.head.appendChild(styleSheet);
+
+
 
 
 
@@ -3944,113 +4269,1037 @@
 
 
 
+
                         // Contact Form Functionality
-            document.addEventListener('DOMContentLoaded', function() {
-                const contactForm = document.getElementById('contactForm');
-                const successMessage = document.getElementById('successMessage');
-                const sendAnotherBtn = document.getElementById('sendAnother');
-                const userNameSpan = document.getElementById('userName');
+            class ContactFormManager {
+                constructor() {
+                    this.form = document.getElementById('contactForm');
+                    this.submitBtn = this.form.querySelector('.btn-gold');
+                    this.successMessage = document.getElementById('successMessage');
+                    this.userNameSpan = document.getElementById('userName');
+                    this.sendAnotherBtn = document.getElementById('sendAnother');
 
-                // Contact form submission
-                if (contactForm) {
-                    contactForm.addEventListener('submit', function(e) {
+                    this.form.setAttribute('novalidate', 'true');
+                    this.init();
+                }
+
+                init() {
+                    this.setupEventListeners();
+                    this.setupFormValidation();
+                }
+
+                setupEventListeners() {
+                    this.form.addEventListener('submit', (e) => {
                         e.preventDefault();
+                        e.stopPropagation();
+                        return false;
+                    });
 
-                        const name = document.getElementById('name').value;
-                        const email = document.getElementById('email1').value;
-                        const subject = document.getElementById('subject').value;
-                        const message = document.getElementById('message').value;
+                    this.submitBtn.addEventListener('click', (e) => {
+                        this.handleFormSubmit(e);
+                    });
 
-                        // Simulate form submission
-                        const submitBtn = contactForm.querySelector('button[type="submit"]');
-                        const originalText = submitBtn.innerHTML;
+                    this.sendAnotherBtn.addEventListener('click', () => {
+                        this.resetForm();
+                    });
 
-                        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-                        submitBtn.disabled = true;
+                    this.form.querySelectorAll('input, textarea, select').forEach(input => {
+                        input.addEventListener('blur', () => {
+                            this.validateField(input);
+                        });
 
-                        setTimeout(() => {
-                            // Show success message
-                            userNameSpan.textContent = name;
-                            contactForm.style.display = 'none';
-                            successMessage.classList.add('active');
-
-                            // Reset button
-                            submitBtn.innerHTML = originalText;
-                            submitBtn.disabled = false;
-
-                            // Log form data (in real app, send to server)
-                            console.log('Contact Form Submitted:', { name, email, subject, message });
-
-                        }, 2000);
+                        input.addEventListener('input', () => {
+                            this.clearFieldError(input);
+                            if (input.value.trim()) {
+                                this.validateField(input);
+                            }
+                        });
                     });
                 }
 
-                // Send another message
-                if (sendAnotherBtn) {
-                    sendAnotherBtn.addEventListener('click', function() {
-                        successMessage.classList.remove('active');
-                        contactForm.style.display = 'block';
-                        contactForm.reset();
+                setupFormValidation() {
+                    const phoneInput = document.getElementById('phone1');
+                    if (phoneInput) {
+                        phoneInput.addEventListener('input', (e) => {
+                            e.target.value = e.target.value.replace(/[^0-9+\-\s]/g, '');
+                        });
+                    }
+                }
+
+                validateField(field) {
+                    const value = field.value.trim();
+                    let isValid = true;
+                    let errorMessage = '';
+
+                    this.clearFieldError(field);
+
+                    if (field.hasAttribute('required') && !value) {
+                        isValid = false;
+                        errorMessage = 'This field is required';
+                    }
+
+                    if (field.type === 'email' && value) {
+                        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                        if (!emailRegex.test(value)) {
+                            isValid = false;
+                            errorMessage = 'Please enter a valid email address';
+                        }
+                    }
+
+                    if (field.id === 'phone1' && value) {
+                        const phoneRegex = /^[\d\s+\-()]{10,}$/;
+                        if (!phoneRegex.test(value)) {
+                            isValid = false;
+                            errorMessage = 'Please enter a valid phone number';
+                        }
+                    }
+
+                    if (!isValid) {
+                        this.showFieldError(field, errorMessage);
+                    }
+
+                    return isValid;
+                }
+
+                showFieldError(field, message) {
+                    field.classList.add('error');
+                    let errorElement = field.parentNode.querySelector('.field-error');
+                    if (!errorElement) {
+                        errorElement = document.createElement('div');
+                        errorElement.className = 'field-error';
+                        field.parentNode.appendChild(errorElement);
+                    }
+                    errorElement.textContent = message;
+                }
+
+                clearFieldError(field) {
+                    field.classList.remove('error');
+                    const errorElement = field.parentNode.querySelector('.field-error');
+                    if (errorElement) {
+                        errorElement.textContent = '';
+                    }
+                }
+
+                async handleFormSubmit(e) {
+                    if (e) {
+                        e.preventDefault();
+                        this.submitBtn.blur();
+                    }
+
+                    const fields = this.form.querySelectorAll('input, textarea, select');
+                    let isFormValid = true;
+
+                    fields.forEach(field => {
+                        if (!this.validateField(field)) {
+                            isFormValid = false;
+                        }
+                    });
+
+                    if (!isFormValid) {
+                        this.showNotification('Please fix the errors in the form', 'error');
+                        return false;
+                    }
+
+                    this.setLoadingState(true);
+
+                    try {
+                        const formData = {
+                            name: document.getElementById('name').value.trim(),
+                            email: document.getElementById('email1').value.trim(),
+                            phone: document.getElementById('phone1')?.value.trim() || '',
+                            subject: document.getElementById('subject').value,
+                            department: document.getElementById('department1').value,
+                            message: document.getElementById('message').value.trim()
+                        };
+
+                        await this.submitFormData();
+                        this.showSuccessMessage(formData.name);
+
+                    } catch (error) {
+                        this.showNotification('Sorry, there was an error sending your message. Please try again.', 'error');
+                    } finally {
+                        this.setLoadingState(false);
+                    }
+
+                    return false;
+                }
+
+                async submitFormData() {
+                    return new Promise((resolve, reject) => {
+                        setTimeout(() => {
+                            if (Math.random() > 0.05) {
+                                resolve();
+                            } else {
+                                reject(new Error('Network error'));
+                            }
+                        }, 1500);
                     });
                 }
 
-                // Enhanced click effects for contact items
-                const clickableItems = document.querySelectorAll('.contact-item-mega.clickable');
+                setLoadingState(isLoading) {
+                    if (isLoading) {
+                        this.submitBtn.disabled = true;
+                        this.submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                    } else {
+                        this.submitBtn.disabled = false;
+                        this.submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+                    }
+                }
 
-                clickableItems.forEach(item => {
-                    item.addEventListener('click', function(e) {
-                        // Add click feedback
-                        this.style.transform = 'translateY(-5px) scale(0.98)';
+                showSuccessMessage(userName) {
+                    this.userNameSpan.textContent = userName;
 
-                        setTimeout(() => {
-                            this.style.transform = '';
-                        }, 300);
-                    });
+                    // Simple fade out form
+                    this.form.style.opacity = '0';
+                    this.form.style.pointerEvents = 'none';
+                    this.form.style.transition = 'opacity 0.3s ease';
 
-                    // Enhanced hover effects with JavaScript
-                    item.addEventListener('mouseenter', function() {
-                        this.style.zIndex = '10';
-                    });
+                    // Show success message
+                    setTimeout(() => {
+                        this.successMessage.classList.add('active');
+                    }, 300);
+                }
 
-                    item.addEventListener('mouseleave', function() {
-                        this.style.zIndex = '';
-                    });
-                });
+                resetForm() {
+                    // Hide success message
+                    this.successMessage.classList.remove('active');
 
-                // Add keyboard accessibility
-                clickableItems.forEach(item => {
-                    item.addEventListener('keypress', function(e) {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                            e.preventDefault();
-                            this.click();
+                    // Show form
+                    setTimeout(() => {
+                        this.form.style.opacity = '1';
+                        this.form.style.pointerEvents = 'all';
+                        this.form.reset();
+
+                        // Clear errors
+                        this.form.querySelectorAll('.field-error').forEach(error => {
+                            error.textContent = '';
+                        });
+                        this.form.querySelectorAll('.error').forEach(field => {
+                            field.classList.remove('error');
+                        });
+                    }, 300);
+                }
+
+                showNotification(message, type) {
+                    const existingNotification = document.querySelector('.form-notification');
+                    if (existingNotification) {
+                        existingNotification.remove();
+                    }
+
+                    const notification = document.createElement('div');
+                    notification.className = `form-notification ${type}`;
+                    notification.innerHTML = `
+                        <div class="notification-content">
+                            <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
+                            <span>${message}</span>
+                        </div>
+                        <button class="notification-close">&times;</button>
+                    `;
+
+                    document.body.appendChild(notification);
+
+                    // Auto remove after 5 seconds
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            notification.remove();
                         }
-                    });
-                });
-            });
-
-            // Optional: Add intersection observer for animations
-            function initContactAnimations() {
-                const contactItems = document.querySelectorAll('.contact-item-mega');
-
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.style.opacity = '1';
-                            entry.target.style.transform = 'translateY(0)';
-                        }
-                    });
-                }, {
-                    threshold: 0.1,
-                    rootMargin: '0px 0px -50px 0px'
-                });
-
-                contactItems.forEach(item => {
-                    item.style.opacity = '0';
-                    item.style.transform = 'translateY(30px)';
-                    item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                    observer.observe(item);
-                });
+                    }, 5000);
+                }
             }
 
-            // Initialize animations when DOM is loaded
-            document.addEventListener('DOMContentLoaded', initContactAnimations);
+            // Add minimal CSS
+            const contactStyles = `
+                .field-error {
+                    color: #e74c3c;
+                    font-size: 0.8rem;
+                    margin-top: 5px;
+                }
+
+                .error {
+                    border-color: #e74c3c !important;
+                }
+
+                .form-notification {
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: #4CAF50;
+                    color: white;
+                    padding: 15px 20px;
+                    border-radius: 5px;
+                    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                    z-index: 10000;
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                }
+
+                .form-notification.error {
+                    background: #e74c3c;
+                }
+
+                .notification-close {
+                    background: none;
+                    border: none;
+                    color: white;
+                    cursor: pointer;
+                }
+
+                .fa-spin {
+                    animation: fa-spin 1s infinite linear;
+                }
+
+                @keyframes fa-spin {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); }
+                }
+            `;
+
+            // Initialize
+            document.addEventListener('DOMContentLoaded', () => {
+                const styleSheet = document.createElement('style');
+                styleSheet.textContent = contactStyles;
+                document.head.appendChild(styleSheet);
+                new ContactFormManager();
+            });
+
+
+
+
+
+
+
+
+            // ESA Join Modal Functionality - Completely Isolated
+            document.addEventListener('DOMContentLoaded', function() {
+                // Only initialize if our modal elements exist
+                if (!document.getElementById('joinEsaBtn2')) return;
+
+                // DOM Elements - All with 2 suffix
+                const joinEsaBtn2 = document.getElementById('joinEsaBtn2');
+                const esaJoinModal2 = document.getElementById('esaJoinModal2');
+                const esaPaymentModal2 = document.getElementById('esaPaymentModal2');
+                const esaSuccessModal2 = document.getElementById('esaSuccessModal2');
+                const closeButtons2 = document.querySelectorAll('.modal-close2');
+                const cancelBtn2 = document.getElementById('cancelBtn2');
+                const successOkBtn2 = document.getElementById('successOkBtn2');
+                const esaForm2 = document.getElementById('esaForm2');
+                const submitBtn2 = document.getElementById('submitBtn2');
+                const admissionYear2 = document.getElementById('admissionYear2');
+                const graduationYear2 = document.getElementById('graduationYear2');
+                const batchNumberDisplay2 = document.getElementById('batchNumberDisplay2');
+                const membershipDate2 = document.getElementById('membershipDate2');
+                const payWithMpesa2 = document.getElementById('payWithMpesa2');
+                const shareBtn2 = document.getElementById('shareBtn2');
+
+                // Initialize years in dropdowns
+                function initializeYears() {
+                    const currentYear = new Date().getFullYear();
+                    const startYear = 2018;
+                    const endYear = 2040;
+
+                    if (admissionYear2) {
+                        admissionYear2.innerHTML = '<option value="">Select Year</option>';
+                        for (let year = startYear; year <= endYear; year++) {
+                            const option = document.createElement('option');
+                            option.value = year;
+                            option.textContent = year;
+                            admissionYear2.appendChild(option);
+                        }
+                    }
+
+                    if (graduationYear2) {
+                        graduationYear2.innerHTML = '<option value="">Select Year</option>';
+                        for (let year = startYear; year <= endYear; year++) {
+                            const option = document.createElement('option');
+                            option.value = year;
+                            option.textContent = year;
+                            graduationYear2.appendChild(option);
+                        }
+                    }
+                }
+
+                // Validation functions
+                function validateAdmissionNumber(number) {
+                    const regex = /^(cse|mpe|abe)\/\d{3}\/\d{2}$/i;
+                    return regex.test(number);
+                }
+
+                function validateEmail(email) {
+                    const regex = /^[a-z]{3}\d{5}@uoeld\.ac\.ke$/i;
+                    return regex.test(email);
+                }
+
+                function validatePhone(phone) {
+                    const regex = /^\+?254\d{9}$|^0\d{9}$/;
+                    return regex.test(phone);
+                }
+
+                function validateMpesaNumber(phone) {
+                    const regex = /^0[17]\d{8}$/;
+                    return regex.test(phone);
+                }
+
+                // Show error message
+                function showError(input, message) {
+                    const formGroup = input.closest('.form-group');
+                    if (formGroup) {
+                        const errorElement = formGroup.querySelector('.error-message');
+                        if (errorElement) {
+                            errorElement.textContent = message;
+                        }
+                        input.style.borderColor = '#e74c3c';
+                    }
+                }
+
+                // Clear error message
+                function clearError(input) {
+                    const formGroup = input.closest('.form-group');
+                    if (formGroup) {
+                        const errorElement = formGroup.querySelector('.error-message');
+                        if (errorElement) {
+                            errorElement.textContent = '';
+                        }
+                        input.style.borderColor = '#e0e0e0';
+                    }
+                }
+
+                // Real-time validation
+                function setupRealTimeValidation() {
+                    const inputs = esaForm2 ? esaForm2.querySelectorAll('input, select') : [];
+
+                    inputs.forEach(input => {
+                        input.addEventListener('input', function() {
+                            validateField(this);
+                        });
+
+                        input.addEventListener('blur', function() {
+                            validateField(this);
+                        });
+                    });
+                }
+
+                // Validate individual field
+                function validateField(input) {
+                    const value = input.value.trim();
+
+                    switch(input.id) {
+                        case 'admissionNumber2':
+                            if (value && !validateAdmissionNumber(value)) {
+                                showError(input, 'Please use format: cse/000/24, mpe/000/24, or abe/000/24');
+                            } else {
+                                clearError(input);
+                            }
+                            break;
+
+                        case 'email2':
+                            if (value && !validateEmail(value)) {
+                                showError(input, 'Please use school email format: cse00624@uoeld.ac.ke');
+                            } else {
+                                clearError(input);
+                            }
+                            break;
+
+                        case 'phone2':
+                            if (value && !validatePhone(value)) {
+                                showError(input, 'Please use valid Kenyan phone format: +254... or 0...');
+                            } else {
+                                clearError(input);
+                            }
+                            break;
+
+                        case 'mpesaNumber2':
+                            if (value && !validateMpesaNumber(value)) {
+                                showError(input, 'Please use valid M-Pesa number format: 07XXXXXXXX');
+                            } else {
+                                clearError(input);
+                            }
+                            break;
+
+                        default:
+                            if (!value && input.required) {
+                                showError(input, 'This field is required');
+                            } else {
+                                clearError(input);
+                            }
+                    }
+                }
+
+                // Modal handlers
+                function openModal(modal) {
+                    if (modal) {
+                        modal.classList.add('active');
+                        document.body.style.overflow = 'hidden';
+                    }
+                }
+
+                function closeModal(modal) {
+                    if (modal) {
+                        modal.classList.remove('active');
+                    }
+                    document.body.style.overflow = 'auto';
+                }
+
+                function closeAllModals() {
+                    const modals = document.querySelectorAll('.department-full-modal');
+                    modals.forEach(modal => {
+                        closeModal(modal);
+                    });
+                }
+
+                // Process M-Pesa payment
+                async function processMpesaPayment() {
+                    const mpesaNumberInput = document.getElementById('mpesaNumber2');
+                    if (!mpesaNumberInput) return;
+
+                    const mpesaNumber = mpesaNumberInput.value.trim();
+
+                    if (!validateMpesaNumber(mpesaNumber)) {
+                        showError(mpesaNumberInput, 'Please enter a valid M-Pesa number');
+                        return;
+                    }
+
+                    openModal(esaPaymentModal2);
+
+                    try {
+                        await simulateMpesaPayment(mpesaNumber);
+                        showNotification('Payment successful! Funds transferred to National Bank account.', 'success');
+
+                        closeModal(esaPaymentModal2);
+                        if (submitBtn2) {
+                            submitBtn2.disabled = false;
+                        }
+
+                    } catch (error) {
+                        showNotification('Payment failed. Please try again.', 'error');
+                        closeModal(esaPaymentModal2);
+                    }
+                }
+
+                // Simulate M-Pesa payment
+                function simulateMpesaPayment(phone) {
+                    return new Promise((resolve, reject) => {
+                        setTimeout(() => {
+                            if (Math.random() > 0.1) {
+                                resolve({ success: true, transactionId: 'MPESA_' + Date.now() });
+                            } else {
+                                reject(new Error('Payment failed'));
+                            }
+                        }, 3000);
+                    });
+                }
+
+                // Handle form submission
+                async function handleFormSubmission(e) {
+                    e.preventDefault();
+
+                    if (!esaForm2) return;
+
+                    // Validate all fields
+                    const inputs = esaForm2.querySelectorAll('input[required], select[required]');
+                    let isValid = true;
+
+                    inputs.forEach(input => {
+                        validateField(input);
+                        if (!input.value.trim() || input.style.borderColor === 'rgb(231, 76, 60)') {
+                            isValid = false;
+                        }
+                    });
+
+                    if (!isValid) {
+                        showNotification('Please fix all errors before submitting.', 'error');
+                        return;
+                    }
+
+                    // Show loading state
+                    if (submitBtn2) {
+                        const btnText = submitBtn2.querySelector('.btn-text');
+                        const btnSpinner = submitBtn2.querySelector('.btn-spinner');
+                        if (btnText) btnText.style.display = 'none';
+                        if (btnSpinner) btnSpinner.style.display = 'flex';
+                        submitBtn2.disabled = true;
+                    }
+
+                    try {
+                        // Generate batch number and date
+                        const batchNumber = generateBatchNumber();
+                        const currentDate = new Date().toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric'
+                        });
+
+                        if (batchNumberDisplay2) {
+                            batchNumberDisplay2.textContent = batchNumber;
+                        }
+                        if (membershipDate2) {
+                            membershipDate2.textContent = currentDate;
+                        }
+
+                        // Prepare form data
+                        const formData = {
+                            fullName: document.getElementById('fullName2')?.value || '',
+                            admissionNumber: document.getElementById('admissionNumber2')?.value || '',
+                            department: document.getElementById('department2')?.value || '',
+                            admissionYear: document.getElementById('admissionYear2')?.value || '',
+                            graduationYear: document.getElementById('graduationYear2')?.value || '',
+                            email: document.getElementById('email2')?.value || '',
+                            phone: document.getElementById('phone2')?.value || '',
+                            batchNumber: batchNumber,
+                            membershipDate: currentDate,
+                            timestamp: new Date().toISOString()
+                        };
+
+                        // Save to database
+                        await saveToDatabase(formData);
+
+                        // Send confirmation email
+                        await sendConfirmationEmail(formData);
+
+                        // Show success modal
+                        closeModal(esaJoinModal2);
+                        openModal(esaSuccessModal2);
+
+                        showNotification('Registration completed successfully!', 'success');
+
+                    } catch (error) {
+                        console.error('Error submitting form:', error);
+                        showNotification('Error submitting application. Please try again.', 'error');
+                    } finally {
+                        // Reset loading state
+                        if (submitBtn2) {
+                            const btnText = submitBtn2.querySelector('.btn-text');
+                            const btnSpinner = submitBtn2.querySelector('.btn-spinner');
+                            if (btnText) btnText.style.display = 'block';
+                            if (btnSpinner) btnSpinner.style.display = 'none';
+                            submitBtn2.disabled = false;
+                        }
+                    }
+                }
+
+                function generateBatchNumber() {
+                    const timestamp = Date.now().toString(36);
+                    const random = Math.random().toString(36).substr(2, 5);
+                    return `ESA-${timestamp}-${random}`.toUpperCase();
+                }
+
+                async function saveToDatabase(data) {
+                    console.log('Saving to database:', data);
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+
+                    const existingData = JSON.parse(localStorage.getItem('esaMemberships') || '[]');
+                    existingData.push(data);
+                    localStorage.setItem('esaMemberships', JSON.stringify(existingData));
+
+                    return { success: true, id: Date.now() };
+                }
+
+                async function sendConfirmationEmail(data) {
+                    console.log('Sending confirmation email to:', data.email);
+                    await new Promise(resolve => setTimeout(resolve, 1500));
+                    return { success: true };
+                }
+
+                function generateMembershipCard() {
+                    console.log('Generating membership card...');
+                    showNotification('Membership card downloaded successfully!', 'success');
+                }
+
+                function shareMembership() {
+                    if (navigator.share) {
+                        navigator.share({
+                            title: 'ESA Membership',
+                            text: 'I just joined the Engineering Students Association!',
+                            url: window.location.href
+                        });
+                    } else {
+                        showNotification('Share link copied to clipboard!', 'success');
+                    }
+                }
+
+                // Show notification
+                function showNotification(message, type) {
+                    const notification = document.createElement('div');
+                    notification.className = `notification ${type}`;
+                    notification.innerHTML = `
+                        <span>${message}</span>
+                        <button onclick="this.parentElement.remove()">&times;</button>
+                    `;
+
+                    notification.style.cssText = `
+                        position: fixed;
+                        top: 20px;
+                        right: 20px;
+                        padding: 15px 20px;
+                        background: ${type === 'success' ? '#27ae60' : '#e74c3c'};
+                        color: white;
+                        border-radius: 8px;
+                        box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+                        z-index: 10021;
+                        display: flex;
+                        align-items: center;
+                        gap: 15px;
+                        max-width: 400px;
+                        animation: slideInRight 0.3s ease;
+                        font-weight: 500;
+                    `;
+
+                    document.body.appendChild(notification);
+
+                    setTimeout(() => {
+                        if (notification.parentElement) {
+                            notification.remove();
+                        }
+                    }, 5000);
+                }
+
+                // Add notification styles
+                const notificationStyles = document.createElement('style');
+                notificationStyles.textContent = `
+                    @keyframes slideInRight {
+                        from { transform: translateX(100%); opacity: 0; }
+                        to { transform: translateX(0); opacity: 1; }
+                    }
+
+                    .notification button {
+                        background: none;
+                        border: none;
+                        color: white;
+                        font-size: 18px;
+                        cursor: pointer;
+                        padding: 0;
+                        width: 20px;
+                        height: 20px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border-radius: 50%;
+                        transition: background 0.3s ease;
+                    }
+
+                    .notification button:hover {
+                        background: rgba(255,255,255,0.2);
+                    }
+                `;
+                document.head.appendChild(notificationStyles);
+
+                // Event listeners setup
+                function setupEventListeners() {
+                    // Open modal
+                    if (joinEsaBtn2) {
+                        joinEsaBtn2.addEventListener('click', () => openModal(esaJoinModal2));
+                    }
+
+                    // Close modal buttons
+                    closeButtons2.forEach(button => {
+                        button.addEventListener('click', closeAllModals);
+                    });
+
+                    // Backdrop click
+                    const backdrops = document.querySelectorAll('.modal-backdrop');
+                    backdrops.forEach(backdrop => {
+                        backdrop.addEventListener('click', closeAllModals);
+                    });
+
+                    // Cancel button
+                    if (cancelBtn2) {
+                        cancelBtn2.addEventListener('click', closeAllModals);
+                    }
+
+                    // Success modal buttons
+                    if (successOkBtn2) {
+                        successOkBtn2.addEventListener('click', function() {
+                            closeAllModals();
+                            generateMembershipCard();
+                        });
+                    }
+
+                    if (shareBtn2) {
+                        shareBtn2.addEventListener('click', shareMembership);
+                    }
+
+                    // Form submission
+                    if (esaForm2) {
+                        esaForm2.addEventListener('submit', handleFormSubmission);
+                    }
+
+                    // Payment button
+                    if (payWithMpesa2) {
+                        payWithMpesa2.addEventListener('click', processMpesaPayment);
+                    }
+
+                    // Real-time validation
+                    setupRealTimeValidation();
+                }
+
+                // Initialize everything
+                initializeYears();
+                setupEventListeners();
+
+                console.log('ESA Join Modal System Initialized - Only M-Pesa to National Bank');
+            });
+
+
+
+
+
+
+
+
+                // Image Rotator with 4-second base rotation
+                class AdvancedImageRotator {
+                    constructor() {
+                        this.imageSets = {
+                            general: [
+                                'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2071&q=80',
+                                'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+                                'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+                                'https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+                                'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'
+                            ],
+                            wie: [
+                                'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2071&q=80',
+                                'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+                                'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+                                'https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+                                'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'
+                            ],
+                            news: [
+                                'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+                                'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+                                'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+                                'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2071&q=80',
+                                'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'
+                            ]
+                        };
+
+                        this.currentIndices = {
+                            general: 0,
+                            wie: 0,
+                            news: 0
+                        };
+
+                        this.rotationIntervals = new Map();
+                        this.isRotating = new Map();
+
+                        // Base rotation time in milliseconds (4 seconds)
+                        this.baseRotationTime = 5000;
+
+                        this.init();
+                    }
+
+                    getRandomImage(setName) {
+                        const images = this.imageSets[setName];
+                        let newIndex;
+
+                        // Ensure we don't get the same image twice in a row
+                        do {
+                            newIndex = Math.floor(Math.random() * images.length);
+                        } while (newIndex === this.currentIndices[setName] && images.length > 1);
+
+                        this.currentIndices[setName] = newIndex;
+                        return images[newIndex];
+                    }
+
+                    rotateImage(container) {
+                        if (this.isRotating.get(container)) return;
+
+                        this.isRotating.set(container, true);
+                        const setName = container.getAttribute('data-image-set');
+                        const img = container.querySelector('img');
+                        const newSrc = this.getRandomImage(setName);
+
+                        // Create a new image element for preloading and crossfade
+                        const newImg = new Image();
+                        newImg.src = newSrc;
+
+                        newImg.onload = () => {
+                            // Start crossfade effect
+                            img.style.transition = 'opacity 1s ease-in-out';
+                            img.style.opacity = '0.3';
+
+                            setTimeout(() => {
+                                // Swap the image source
+                                img.src = newSrc;
+
+                                // Fade in the new image
+                                setTimeout(() => {
+                                    img.style.opacity = '1';
+                                    this.isRotating.set(container, false);
+                                }, 100);
+                            }, 1000);
+                        };
+
+                        newImg.onerror = () => {
+                            console.warn('Failed to load image:', newSrc);
+                            this.isRotating.set(container, false);
+                        };
+                    }
+
+                    scheduleRotation(container) {
+                        // Random delay around 4 seconds (3.5 to 4.5 seconds) for natural feel
+                        const randomDelay = this.baseRotationTime - 500 + Math.random() * 1000;
+
+                        const interval = setInterval(() => {
+                            if (!this.isRotating.get(container)) {
+                                this.rotateImage(container);
+                            }
+                        }, randomDelay);
+
+                        this.rotationIntervals.set(container, interval);
+
+                        // Initial rotation with random delay (1.5 to 3 seconds)
+                        const initialDelay = 1500 + Math.random() * 1500;
+                        setTimeout(() => {
+                            this.rotateImage(container);
+                        }, initialDelay);
+                    }
+
+                    init() {
+                        const containers = document.querySelectorAll('.about-image-mega[data-image-set]');
+
+                        // Add CSS for smooth transitions
+                        this.addTransitionStyles();
+
+                        // Initialize rotation state for each container
+                        containers.forEach(container => {
+                            this.isRotating.set(container, false);
+                        });
+
+                        // Start individual rotation schedules for each container
+                        containers.forEach(container => {
+                            this.scheduleRotation(container);
+                        });
+
+                        // Pause rotation when page is not visible
+                        document.addEventListener('visibilitychange', () => {
+                            if (document.hidden) {
+                                this.pauseAllRotations();
+                            } else {
+                                this.resumeAllRotations();
+                            }
+                        });
+
+                        console.log('Image rotator initialized with 4-second base rotation');
+                    }
+
+                    addTransitionStyles() {
+                        const style = document.createElement('style');
+                        style.textContent = `
+                            .about-image-mega img {
+                                transition: opacity 1s ease-in-out !important;
+                            }
+                            .about-image-mega:hover img {
+                                transition: opacity 1s ease-in-out, transform 0.6s ease !important;
+                            }
+                        `;
+                        document.head.appendChild(style);
+                    }
+
+                    pauseAllRotations() {
+                        this.rotationIntervals.forEach((interval, container) => {
+                            clearInterval(interval);
+                        });
+                    }
+
+                    resumeAllRotations() {
+                        const containers = document.querySelectorAll('.about-image-mega[data-image-set]');
+                        containers.forEach(container => {
+                            this.scheduleRotation(container);
+                        });
+                    }
+
+                    destroy() {
+                        this.pauseAllRotations();
+                        this.rotationIntervals.clear();
+                        this.isRotating.clear();
+                    }
+                }
+
+                // Initialize when DOM is ready
+                document.addEventListener('DOMContentLoaded', () => {
+                    // Initialize the advanced image rotator
+                    window.imageRotator = new AdvancedImageRotator();
+                });
+
+                // Alternative: Simple 4-second rotator (if you prefer simpler code)
+                function initializeFourSecondRotator() {
+                    const containers = document.querySelectorAll('.about-image-mega[data-image-set]');
+                    const imageSets = {
+                        general: [
+                            'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2071&q=80',
+                            'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+                            'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+                            'https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+                            'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'
+                        ],
+                        wie: [
+                            'https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+                            'https://images.unsplash.com/photo-1581094794360-5a0cf566038a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+                            'https://images.unsplash.com/photo-1581094794358-8460cf969b14?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+                            'https://images.unsplash.com/photo-1581094794355-9270955b0385?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+                            'https://images.unsplash.com/photo-1581094794359-8460cf969a14?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'
+                        ],
+                        news: [
+                            'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+                            'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+                            'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+                            'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2071&q=80',
+                            'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'
+                        ]
+                    };
+
+                    containers.forEach(container => {
+                        const setName = container.getAttribute('data-image-set');
+                        const img = container.querySelector('img');
+                        let currentIndex = 0;
+
+                        // Set initial transition
+                        img.style.transition = 'opacity 1s ease-in-out';
+
+                        // Start rotation with 4-second interval plus some randomness
+                        const interval = setInterval(() => {
+                            const images = imageSets[setName];
+                            let newIndex;
+
+                            do {
+                                newIndex = Math.floor(Math.random() * images.length);
+                            } while (newIndex === currentIndex && images.length > 1);
+
+                            currentIndex = newIndex;
+
+                            // Smooth transition
+                            img.style.opacity = '0.3';
+                            setTimeout(() => {
+                                img.src = images[newIndex];
+                                setTimeout(() => {
+                                    img.style.opacity = '1';
+                                }, 100);
+                            }, 1000);
+
+                        }, 4000 + Math.random() * 1000); // 4-5 seconds
+
+                        // Store interval for cleanup
+                        container.dataset.rotationInterval = interval;
+
+                        // Initial rotation after random delay
+                        setTimeout(() => {
+                            const images = imageSets[setName];
+                            const newIndex = Math.floor(Math.random() * images.length);
+                            currentIndex = newIndex;
+                            img.src = images[newIndex];
+                        }, 1000 + Math.random() * 2000);
+                    });
+
+                    // Cleanup function
+                    window.cleanupRotations = function() {
+                        containers.forEach(container => {
+                            if (container.dataset.rotationInterval) {
+                                clearInterval(parseInt(container.dataset.rotationInterval));
+                            }
+                        });
+                    };
+                }
+
+                // Uncomment the line below if you want to use the simpler version instead
+                // document.addEventListener('DOMContentLoaded', initializeFourSecondRotator);
