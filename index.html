@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ESA UoE - Engineering Students Association</title>
+    <title>ESA UoE - Engineering Students' Association</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
@@ -45,7 +45,7 @@
                         </div>
                         <div class="logo-modal-info">
                             <h3>ESA UoE</h3>
-                            <p>Engineering Students Association</p>
+                            <p>Engineering Students' Association</p>
                             <p>University of Eldoret</p>
                         </div>
                     </div>
@@ -118,26 +118,26 @@
         </header>
 
             <!-- Hero Section -->
-    <section class="hero-mega" id="home">
-        <div class="hero-content-mega">
-            <div class="hero-badge">Engineering Excellence Since 2013</div>
-            <h1 class="hero-title">Engineering Students' <span>Association</span></h1>
-            <p class="hero-subtitle" id="typing-subtitle"></p>
-            <div class="hero-btns-mega">
-                <a href="#about" class="btn btn-gold"><i class="fas fa-rocket"></i> Explore More</a>
-                <a href="#contact" class="btn btn-outline"><i class="fas fa-user-plus"></i> Join ESA</a>
-            </div>
-        </div>
-        <div class="floating-elements-mega">
-            <div class="floating-element-mega"></div>
-            <div class="floating-element-mega"></div>
-            <div class="floating-element-mega"></div>
-            <div class="floating-element-mega"></div>
-            <div class="floating-element-mega"></div>
-        </div>
+            <section class="hero-mega" id="home">
+                <div class="hero-content-mega">
+                    <div class="hero-badge">Engineering Excellence Since 2013</div>
+                    <h1 class="hero-title">Engineering Students' <span>Association</span></h1>
+                    <p class="hero-subtitle" id="typing-subtitle"></p>
+                    <div class="hero-btns-mega">
+                        <a href="#about" class="btn btn-gold"><i class="fas fa-rocket"></i> Explore More</a>
+                        <button id="joinEsaBtn2" class="btn btn-outline"><i class="fas fa-user-plus"></i> Join ESA</button>
+                    </div>
+                </div>
+                <div class="floating-elements-mega">
+                    <div class="floating-element-mega"></div>
+                    <div class="floating-element-mega"></div>
+                    <div class="floating-element-mega"></div>
+                    <div class="floating-element-mega"></div>
+                    <div class="floating-element-mega"></div>
+                </div>
 
                 <!-- Mouse Scroll Indicator -->
-                 <div class="mouse-scroll-indicator">
+                <div class="mouse-scroll-indicator">
                     <div class="mouse">
                         <div class="wheel"></div>
                     </div>
@@ -147,10 +147,327 @@
                         <span></span>
                     </div>
                 </div>
+            </section>
 
-    </section>
+            <!-- ESA Join Modal -->
+            <div id="esaJoinModal2" class="department-full-modal">
+                <div class="modal-backdrop"></div>
+                <div class="modal-container">
+                    <button class="modal-close modal-close2">&times;</button>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="modal-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div class="modal-title">
+                                <h2>Join Engineering Students' Association</h2>
+                                <p class="modal-subtitle">Begin your journey to engineering excellence</p>
+                            </div>
+                        </div>
 
-            <!-- About Section -->
+                        <div class="modal-body">
+                            <div class="modal-hero-image">
+                                <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Engineering Students' Association">
+                            </div>
+
+                            <div class="modal-grid">
+                                <!-- Personal Information Section -->
+                                <div class="modal-section">
+                                    <h3><i class="fas fa-user-circle"></i>Personal Information</h3>
+                                    <form id="esaForm2" class="esa-form">
+                                        <div class="form-grid">
+                                            <div class="form-group">
+                                                <label for="fullName2">
+                                                    <i class="fas fa-user"></i>
+                                                    Full Name *
+                                                </label>
+                                                <input type="text" id="fullName2" name="fullName2" required placeholder="Enter your full name">
+                                                <span class="error-message"></span>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="admissionNumber2">
+                                                    <i class="fas fa-id-card"></i>
+                                                    Admission Number *
+                                                </label>
+                                                <input type="text" id="admissionNumber2" name="admissionNumber2"
+                                                       placeholder="cse/000/24, mpe/000/24, or abe/000/24" required>
+                                                <span class="error-message"></span>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="department2">
+                                                    <i class="fas fa-building"></i>
+                                                    Department *
+                                                </label>
+                                                <select id="department2" name="department2" required>
+                                                    <option value="">Select Department</option>
+                                                    <option value="Civil and Structural Engineering">Civil and Structural Engineering</option>
+                                                    <option value="Mechanical and Production Engineering">Mechanical and Production Engineering</option>
+                                                    <option value="Electrical Engineering">Electrical Engineering</option>
+                                                    <option value="Agricultural and Biosystems Engineering">Agricultural and Biosystems Engineering</option>
+                                                </select>
+                                                <span class="error-message"></span>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="admissionYear2">
+                                                    <i class="fas fa-calendar-alt"></i>
+                                                    Year of Admission *
+                                                </label>
+                                                <select id="admissionYear2" name="admissionYear2" required>
+                                                    <option value="">Select Year</option>
+                                                </select>
+                                                <span class="error-message"></span>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="graduationYear2">
+                                                    <i class="fas fa-graduation-cap"></i>
+                                                    Graduation Year *
+                                                </label>
+                                                <select id="graduationYear2" name="graduationYear2" required>
+                                                    <option value="">Select Year</option>
+                                                </select>
+                                                <span class="error-message"></span>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="email2">
+                                                    <i class="fas fa-envelope"></i>
+                                                    Email Address *
+                                                </label>
+                                                <input type="email" id="email2" name="email2"
+                                                       placeholder="cse00624@uoeld.ac.ke" required>
+                                                <span class="error-message"></span>
+                                            </div>
+
+                                            <div class="form-group full-width">
+                                                <label for="phone2">
+                                                    <i class="fas fa-phone"></i>
+                                                    Phone Number *
+                                                </label>
+                                                <input type="tel" id="phone2" name="phone2" placeholder="+254712345678" required>
+                                                <span class="error-message"></span>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <!-- Payment Section - Only M-Pesa -->
+                                <div class="modal-section">
+                                    <h3><i class="fas fa-credit-card"></i>Membership Payment</h3>
+                                    <div class="payment-card">
+                                        <div class="payment-header">
+                                            <div class="payment-amount">
+                                                <span class="amount">KSh 500</span>
+                                                <span class="payment-label">One-time Membership Fee</span>
+                                            </div>
+                                            <div class="payment-icon">
+                                                <i class="fas fa-shield-alt"></i>
+                                            </div>
+                                        </div>
+
+                                        <div class="payment-methods">
+                                            <div class="payment-method active" data-method="mpesa">
+                                                <div class="method-icon">
+                                                    <i class="fas fa-mobile-alt"></i>
+                                                </div>
+                                                <span class="method-name">M-Pesa</span>
+                                                <span class="method-desc">Pay to National Bank</span>
+                                            </div>
+                                        </div>
+
+                                        <!-- M-Pesa Payment -->
+                                        <div class="payment-details active" id="mpesa-payment2">
+                                            <div class="payment-info-card">
+                                                <div class="payment-instructions">
+                                                    <i class="fas fa-info-circle"></i>
+                                                    <div>
+                                                        <p><strong>Payment will be processed to National Bank Account</strong></p>
+                                                        <p>Enter your M-Pesa number to receive a payment prompt. The funds will be deposited directly to the ESA National Bank account.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="bank-details-mini">
+                                                    <h4><i class="fas fa-university"></i>Funds go to:</h4>
+                                                    <div class="bank-item">
+                                                        <span class="bank-label">Bank:</span>
+                                                        <span class="bank-value">National Bank Of Kenya</span>
+                                                    </div>
+                                                    <div class="bank-item">
+                                                        <span class="bank-label">Account:</span>
+                                                        <span class="bank-value">ENGINEERING STUDENTS' ASSOCIATION</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="mpesaNumber2">M-Pesa Number *</label>
+                                                <input type="tel" id="mpesaNumber2" name="mpesaNumber2" placeholder="07XXXXXXXX" required>
+                                                <span class="error-message"></span>
+                                            </div>
+                                            <button type="button" class="btn btn-payment" id="payWithMpesa2">
+                                                <i class="fas fa-paper-plane"></i>
+                                                Pay KSh 500 with M-Pesa
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" id="cancelBtn2">
+                                <i class="fas fa-times"></i>
+                                Cancel
+                            </button>
+                            <button type="submit" class="btn btn-primary" id="submitBtn2" form="esaForm2" disabled>
+                                <span class="btn-text">
+                                    <i class="fas fa-paper-plane"></i>
+                                    Complete Registration
+                                </span>
+                                <div class="btn-spinner">
+                                    <div class="spinner"></div>
+                                    Processing...
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payment Processing Modal -->
+            <div id="esaPaymentModal2" class="department-full-modal">
+                <div class="modal-backdrop"></div>
+                <div class="modal-container">
+                    <button class="modal-close modal-close2">&times;</button>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="modal-icon">
+                                <i class="fas fa-credit-card"></i>
+                            </div>
+                            <div class="modal-title">
+                                <h2>Processing Payment</h2>
+                                <p class="modal-subtitle">Please wait while we process your payment</p>
+                            </div>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="modal-grid">
+                                <div class="modal-section" style="text-align: center; padding: 50px 30px;">
+                                    <div class="payment-loader">
+                                        <div class="loader-circle"></div>
+                                        <div class="loader-checkmark">
+                                            <i class="fas fa-check"></i>
+                                        </div>
+                                    </div>
+                                    <h3 style="color: #2c3e50; margin: 30px 0 15px;">Processing Your Payment</h3>
+                                    <p style="color: #7f8c8d; margin-bottom: 30px;">Please wait while we process your payment to National Bank. Do not close this window.</p>
+
+                                    <div class="payment-steps">
+                                        <div class="step active">
+                                            <i class="fas fa-sync"></i>
+                                            Initiating
+                                        </div>
+                                        <div class="step">
+                                            <i class="fas fa-cog"></i>
+                                            Processing
+                                        </div>
+                                        <div class="step">
+                                            <i class="fas fa-check"></i>
+                                            Completing
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Success Modal -->
+            <div id="esaSuccessModal2" class="department-full-modal">
+                <div class="modal-backdrop"></div>
+                <div class="modal-container">
+                    <button class="modal-close modal-close2">&times;</button>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="modal-icon">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="modal-title">
+                                <h2>Welcome to ESA! 🎉</h2>
+                                <p class="modal-subtitle">Your membership has been confirmed</p>
+                            </div>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="modal-grid">
+                                <div class="modal-section" style="text-align: center; padding: 40px 30px;">
+                                    <div class="success-animation">
+                                        <div class="success-icon">
+                                            <i class="fas fa-check"></i>
+                                        </div>
+                                        <div class="confetti"></div>
+                                        <div class="confetti"></div>
+                                        <div class="confetti"></div>
+                                        <div class="confetti"></div>
+                                        <div class="confetti"></div>
+                                    </div>
+
+                                    <p class="success-message" style="color: #5d6d7e; font-size: 1.1rem; line-height: 1.6; margin: 25px 0;">
+                                        Congratulations! You are now an official member of the Engineering Students' Association.
+                                        Your membership details have been sent to your email.
+                                    </p>
+
+                                    <div class="membership-details">
+                                        <div class="detail-item">
+                                            <span class="detail-label">
+                                                <i class="fas fa-id-badge"></i>
+                                                Batch Number:
+                                            </span>
+                                            <span class="detail-value" id="batchNumberDisplay2">ESA-2024-001</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <span class="detail-label">
+                                                <i class="fas fa-calendar-check"></i>
+                                                Member Since:
+                                            </span>
+                                            <span class="detail-value" id="membershipDate2">January 1, 2024</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <span class="detail-label">
+                                                <i class="fas fa-star"></i>
+                                                Status:
+                                            </span>
+                                            <span class="detail-value active-status">Active Member</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="success-actions">
+                                        <button class="btn btn-primary" id="successOkBtn2">
+                                            <i class="fas fa-download"></i>
+                                            Download Membership Card
+                                        </button>
+                                        <button class="btn btn-secondary" id="shareBtn2">
+                                            <i class="fas fa-share-alt"></i>
+                                            Share Achievement
+                                        </button>
+                                    </div>
+
+                                    <div class="welcome-note">
+                                        <i class="fas fa-quote-left"></i>
+                                        <p>Welcome to our community of future engineering leaders. Together, we'll build a brighter future through innovation and collaboration.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+             <!-- About Section -->
             <section class="about-mega" id="about">
                 <div class="container">
                     <div class="section-title">
@@ -160,7 +477,7 @@
                     <div class="about-content-mega">
                         <div class="about-text-mega">
                             <h2>Empowering Tomorrow's Engineering Leaders</h2>
-                            <p>The Engineering Students Association (ESA) at the University of Eldoret stands as a beacon of innovation, excellence, and collaboration in Kenya's engineering education landscape. Founded in 2013, we've grown to become one of the most influential student organizations in East Africa.</p>
+                            <p>The Engineering Students' Association (ESA) at the University of Eldoret stands as a beacon of innovation, excellence, and collaboration in Kenya's engineering education landscape. Founded in 2013, we've grown to become one of the most influential student organizations in East Africa.</p>
                             <p>Our goal is to bridge the gap between academic learning and real-world engineering challenges. Through workshops, industry partnerships, and hands-on projects, we prepare our members for successful careers in various engineering disciplines.</p>
 
                             <!-- Mission & Vision Section -->
@@ -243,35 +560,37 @@
                         </div>
                         <div class="about-images-column">
                             <!-- First Image Card -->
-                            <div class="about-image-mega">
-                                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80" alt="ESA Team Collaboration">
+                            <div class="about-image-mega" data-image-set="general" data-image-id="1">
+                                <img src="conference.jpg" alt="ESA Team Collaboration">
                                 <div class="image-overlay">
                                     <h3>ESA Annual Conference 2023</h3>
                                     <p>Bringing together engineering minds from across Kenya for innovation and collaboration</p>
                                 </div>
                             </div>
 
-                            <!-- Second Image Card -->
-                            <div class="about-image-mega">
-                                <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="ESA Technical Workshop">
+                            <!-- Second Image Card - WIE -->
+                            <div class="about-image-mega" data-image-set="wie" data-image-id="2">
+                                <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Women in Engineering">
                                 <div class="image-overlay">
-                                    <h3>Technical Workshops & Labs</h3>
-                                    <p>Hands-on practical sessions where theory meets real-world engineering applications</p>
+                                    <h3>Women in Engineering</h3>
+                                    <p>Empowering female engineers to shape the future of technology and innovation</p>
+                                    <button class="learn-more-btn" onclick="window.location.href='wie.html'">Learn More</button>
                                 </div>
                             </div>
 
-                            <!-- Third Image Card -->
-                            <div class="about-image-mega">
-                                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="ESA Industry Partnerships">
+                            <!-- Third Image Card - News -->
+                            <div class="about-image-mega" data-image-set="news" data-image-id="3">
+                                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="News & Updates">
                                 <div class="image-overlay">
-                                    <h3>Industry Partnerships</h3>
-                                    <p>Connecting students with leading engineering firms for mentorship and career opportunities</p>
+                                    <h3>News & Updates</h3>
+                                    <p>Stay updated with the latest events and happenings in the School of Engineering</p>
+                                    <button class="learn-more-btn" onclick="window.location.href='news.html'">Learn More</button>
                                 </div>
                             </div>
 
                             <!-- Fourth Image Card -->
-                            <div class="about-image-mega">
-                                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="ESA Research Projects">
+                            <div class="about-image-mega" data-image-set="general" data-image-id="4">
+                                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="ESA Research Projects">
                                 <div class="image-overlay">
                                     <h3>Research & Innovation Hub</h3>
                                     <p>Student-led research projects pushing the boundaries of engineering innovation</p>
@@ -279,8 +598,8 @@
                             </div>
 
                             <!-- Fifth Image Card -->
-                            <div class="about-image-mega">
-                                <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="ESA Community Outreach">
+                            <div class="about-image-mega" data-image-set="general" data-image-id="5">
+                                <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="ESA Community Outreach">
                                 <div class="image-overlay">
                                     <h3>Community Outreach Programs</h3>
                                     <p>Applying engineering skills to solve real community challenges and make a difference</p>
@@ -290,6 +609,8 @@
                     </div>
                 </div>
             </section>
+
+
 
 
         <!-- Departments Section -->
@@ -1770,7 +2091,7 @@
                 <div class="container">
                     <div class="section-title">
                         <h2>Our Team</h2>
-                        <p>Meet the dedicated students leading the Engineering Students Association</p>
+                        <p>Meet the dedicated students leading the Engineering Students' Association</p>
                     </div>
                     <div class="team-grid-mega">
                         <!-- Patron -->
@@ -2740,6 +3061,8 @@
             </div>
         </div>
 
+
+
             <!-- Partners Section -->
             <section class="partners-mega" id="partners">
                 <div class="container">
@@ -2747,8 +3070,30 @@
                         <h2>Our Strategic Partners</h2>
                         <p>Collaborating with industry leaders and regulatory bodies to enhance engineering education and professional development</p>
                     </div>
+
+                    <!-- Donate Button -->
+                    <div class="donate-section-mega">
+                        <button class="btn-donate-mega" id="donateBtn">
+                            <i class="fas fa-heart"></i>
+                            Support ESA Community
+                        </button>
+                    </div>
+
                     <div class="partners-slider-mega">
                         <div class="partner-slide-mega">
+                            <!-- University of Eldoret -->
+                            <div class="partner-logo-mega" data-partner="uoe">
+                                <a href="https://www.uoeld.ac.ke" target="_blank" rel="noopener noreferrer">
+                                    <img src="uoe.png" alt="University of Eldoret" class="partner-image">
+                                    <div class="partner-details">
+                                        <h4>University of Eldoret</h4>
+                                        <p>Our esteemed host institution fostering engineering education and innovation</p>
+                                        <span class="partner-website">www.uoeld.ac.ke</span>
+                                    </div>
+                                    <div class="logo-fallback">UoE</div>
+                                </a>
+                            </div>
+
                             <!-- IEK -->
                             <div class="partner-logo-mega" data-partner="iek">
                                 <a href="https://www.iek.or.ke" target="_blank" rel="noopener noreferrer">
@@ -2831,6 +3176,133 @@
                 </div>
             </section>
 
+            <!-- Donate Modal -->
+            <div class="donate-modal-mega" id="donateModal">
+                <div class="modal-backdrop-mega"></div>
+                <div class="modal-container-mega">
+                    <div class="modal-header-mega">
+                        <h3>Support ESA Community</h3>
+                        <button class="modal-close-mega">&times;</button>
+                    </div>
+                    <div class="modal-content-mega">
+                        <div class="donate-intro-mega">
+                            <div class="donate-icon-mega">
+                                <i class="fas fa-hands-helping"></i>
+                            </div>
+                            <h4>Make a Difference</h4>
+                            <p>Your support helps us organize engineering workshops, career development programs, and community outreach initiatives.</p>
+                        </div>
+
+                        <form class="donate-form-mega" id="donateForm">
+                            <div class="form-section-mega">
+                                <h5>Personal Information</h5>
+                                <div class="form-row-mega">
+                                    <div class="form-group-mega">
+                                        <label for="donateName">Full Name *</label>
+                                        <input type="text" id="donateName" class="form-control-mega" placeholder="Your full name" required>
+                                    </div>
+                                    <div class="form-group-mega">
+                                        <label for="donateEmail">Email Address *</label>
+                                        <input type="email" id="donateEmail" class="form-control-mega" placeholder="email@example.com" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-row-mega">
+                                    <div class="form-group-mega">
+                                        <label for="donatePhone">Phone Number *</label>
+                                        <input type="tel" id="donatePhone" class="form-control-mega" placeholder="+254 XXX XXX XXX" required>
+                                    </div>
+                                    <div class="form-group-mega">
+                                        <label for="donateOrganization">Organization/Company</label>
+                                        <input type="text" id="donateOrganization" class="form-control-mega" placeholder="Your organization (optional)">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-section-mega">
+                                <h5>Donation Details</h5>
+                                <div class="form-group-mega">
+                                    <label for="donateType">Type of Support *</label>
+                                    <select id="donateType" class="form-control-mega" required>
+                                        <option value="">Select support type</option>
+                                        <option value="financial">Financial Donation</option>
+                                        <option value="equipment">Equipment/Resources</option>
+                                        <option value="sponsorship">Event Sponsorship</option>
+                                        <option value="mentorship">Mentorship Program</option>
+                                        <option value="other">Other Support</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group-mega">
+                                    <label for="donateAmount">Estimated Value/Amount</label>
+                                    <input type="text" id="donateAmount" class="form-control-mega" placeholder="e.g., KES 50,000 or Equipment worth...">
+                                </div>
+
+                                <div class="form-group-mega">
+                                    <label for="donatePurpose">Intended Purpose</label>
+                                    <select id="donatePurpose" class="form-control-mega">
+                                        <option value="">Select preferred purpose (optional)</option>
+                                        <option value="workshops">Engineering Workshops</option>
+                                        <option value="career">Career Development</option>
+                                        <option value="community">Community Outreach</option>
+                                        <option value="equipment">Lab Equipment</option>
+                                        <option value="general">General Support</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-section-mega">
+                                <h5>Additional Information</h5>
+                                <div class="form-group-mega">
+                                    <label for="donateMessage">Message & Specific Interests *</label>
+                                    <textarea id="donateMessage" class="form-control-mega" placeholder="Please describe your donation interests, specific programs you'd like to support, and any other relevant details..." rows="4" required></textarea>
+                                </div>
+
+                                <div class="form-group-mega">
+                                    <label for="donateTimeline">Preferred Timeline</label>
+                                    <select id="donateTimeline" class="form-control-mega">
+                                        <option value="">Select timeline (optional)</option>
+                                        <option value="immediate">Immediate</option>
+                                        <option value="1month">Within 1 Month</option>
+                                        <option value="3months">Within 3 Months</option>
+                                        <option value="6months">Within 6 Months</option>
+                                        <option value="flexible">Flexible</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-section-mega">
+                                <h5>Schedule a Discussion</h5>
+                                <div class="form-group-mega">
+                                    <label for="donateCall">Preferred Call Schedule *</label>
+                                    <select id="donateCall" class="form-control-mega" required>
+                                        <option value="">Select preferred call time</option>
+                                        <option value="morning">Weekday Mornings (8AM - 12PM)</option>
+                                        <option value="afternoon">Weekday Afternoons (2PM - 5PM)</option>
+                                        <option value="evening">Weekday Evenings (6PM - 8PM)</option>
+                                        <option value="saturday">Saturday Morning (9AM - 12PM)</option>
+                                        <option value="flexible">Flexible - Will coordinate via email</option>
+                                    </select>
+                                </div>
+
+                                <div class="call-note-mega">
+                                    <i class="fas fa-info-circle"></i>
+                                    <span>We'll contact you to discuss details and coordinate the donation process</span>
+                                </div>
+                            </div>
+
+                            <div class="form-footer-mega">
+                                <button type="button" class="btn-outline-mega" id="donateCancel">Cancel</button>
+                                <button type="submit" class="btn-gold-mega">
+                                    <i class="fas fa-calendar-check"></i>
+                                    Submit & Schedule Call
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
 
 
         <!-- Contact Section -->
@@ -2838,10 +3310,16 @@
             <div class="container">
                 <div class="section-title">
                     <h2>Contact Us</h2>
-                    <p>Get in touch with the Engineering Students Association</p>
+                    <p>Get in touch with the Engineering Students' Association</p>
                 </div>
                 <div class="contact-container-mega">
+                    <!-- Contact Information -->
                     <div class="contact-info-mega">
+                        <div class="contact-header-mega">
+                            <h3>Let's Connect</h3>
+                            <p>Reach out to us through any of these channels</p>
+                        </div>
+
                         <div class="contact-item-mega" data-type="location">
                             <div class="contact-icon-mega">
                                 <i class="fas fa-map-marker-alt"></i>
@@ -2852,6 +3330,7 @@
                             </div>
                             <div class="contact-glow"></div>
                         </div>
+
                         <a href="tel:+254113333041" class="contact-item-mega clickable" data-type="phone">
                             <div class="contact-icon-mega">
                                 <i class="fas fa-phone-alt"></i>
@@ -2865,6 +3344,7 @@
                                 <i class="fas fa-phone"></i> Tap to Call
                             </div>
                         </a>
+
                         <a href="mailto:esauoe@uoeld.ac.ke?subject=Inquiry%20from%20ESA%20Website&body=Hello%20ESA%20Team,%0A%0AI%20would%20like%20to%20get%20in%20touch%20with%20you%20regarding..." class="contact-item-mega clickable" data-type="email">
                             <div class="contact-icon-mega">
                                 <i class="fas fa-envelope"></i>
@@ -2878,6 +3358,7 @@
                                 <i class="fas fa-envelope"></i> Tap to Email
                             </div>
                         </a>
+
                         <div class="contact-item-mega" data-type="hours">
                             <div class="contact-icon-mega">
                                 <i class="fas fa-clock"></i>
@@ -2888,26 +3369,102 @@
                             </div>
                             <div class="contact-glow"></div>
                         </div>
+
+                        <div class="contact-item-mega" data-type="social">
+                            <div class="contact-icon-mega">
+                                <i class="fas fa-share-alt"></i>
+                            </div>
+                            <div class="contact-details-mega">
+                                <h3>Follow Us</h3>
+                                <div class="social-links-contact">
+                                    <a href="https://www.facebook.com/profile.php?id=61575201954261" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                                    <a href="https://www.instagram.com/esa_uoe?igsh=MTZ5NzFoZWx4eGUzaw==" target="_blank"><i class="fab fa-instagram"></i></a>
+                                    <a href="https://www.linkedin.com/in/engineering-students-association-00a577386?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                                    <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+                                </div>
+                            </div>
+                            <div class="contact-glow"></div>
+                        </div>
                     </div>
+
+                    <!-- Contact Form -->
                     <div class="contact-form-mega">
+                        <div class="form-header-mega">
+                            <h3>Send us a Message</h3>
+                            <p>Fill out the form below and we'll get back to you soon</p>
+                        </div>
+
                         <form id="contactForm">
-                            <div class="form-group-mega">
-                                <label for="name">Full Name</label>
-                                <input type="text" id="name" class="form-control-mega" placeholder="Your Name" required>
+                            <div class="form-row-mega">
+                                <div class="form-group-mega">
+                                    <label for="name">Full Name *</label>
+                                    <div class="input-with-icon">
+                                        <i class="fas fa-user"></i>
+                                        <input type="text" id="name" class="form-control-mega" placeholder="Your Full Name" required>
+                                    </div>
+                                </div>
+                                <div class="form-group-mega">
+                                    <label for="email">Email Address *</label>
+                                    <div class="input-with-icon">
+                                        <i class="fas fa-envelope"></i>
+                                        <input type="email" id="email1" class="form-control-mega" placeholder="email@example.com" required>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group-mega">
-                                <label for="email">Email Address</label>
-                                <input type="email" id="email1" class="form-control-mega" placeholder="Your Email" required>
+
+                            <div class="form-row-mega">
+                                <div class="form-group-mega">
+                                    <label for="phone">Phone Number</label>
+                                    <div class="input-with-icon">
+                                        <i class="fas fa-phone"></i>
+                                        <input type="tel" id="phone1" class="form-control-mega" placeholder="+254 XXX XXX XXX">
+                                    </div>
+                                </div>
+                                <div class="form-group-mega">
+                                    <label for="subject">Subject *</label>
+                                    <div class="input-with-icon">
+                                        <i class="fas fa-tag"></i>
+                                        <select id="subject" class="form-control-mega" required>
+                                            <option value="">Select a subject</option>
+                                            <option value="general">General Inquiry</option>
+                                            <option value="membership">Membership</option>
+                                            <option value="partnership">Partnership</option>
+                                            <option value="event">Event Information</option>
+                                            <option value="support">Technical Support</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
+
                             <div class="form-group-mega">
-                                <label for="subject">Subject</label>
-                                <input type="text" id="subject" class="form-control-mega" placeholder="Subject" required>
+                                <label for="department">Department (Optional)</label>
+                                <div class="input-with-icon">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <select id="department1" class="form-control-mega">
+                                        <option value="">Select your department</option>
+                                        <option value="civil">Civil & Structural Engineering</option>
+                                        <option value="mechanical">Mechanical & Production Engineering</option>
+                                        <option value="electrical">Electrical Engineering</option>
+                                        <option value="agricultural">Agricultural & Biosystems Engineering</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
                             </div>
+
                             <div class="form-group-mega">
-                                <label for="message">Message</label>
-                                <textarea id="message" class="form-control-mega" placeholder="Your Message" required></textarea>
+                                <label for="message">Message *</label>
+                                <div class="textarea-with-icon">
+                                    <i class="fas fa-comment"></i>
+                                    <textarea id="message" class="form-control-mega" placeholder="Your message here..." rows="6" required></textarea>
+                                </div>
                             </div>
-                            <button type="submit" class="btn btn-gold"><i class="fas fa-paper-plane"></i> Send Message</button>
+
+
+                            <button type="submit" class="btn btn-gold">
+                                <i class="fas fa-paper-plane"></i> Send Message
+                            </button>
                         </form>
 
                         <!-- Success Message -->
@@ -2915,8 +3472,8 @@
                             <div class="success-icon">
                                 <i class="fas fa-check-circle"></i>
                             </div>
-                            <h3>Thank You, <span id="userName"></span>!!!</h3>
-                            <p>Your message has been successfully sent. We'll get back to you soon.</p>
+                            <h3>Thank You, <span id="userName"></span>!</h3>
+                            <p>Your message has been successfully sent. We'll get back to you within 24 hours.</p>
                             <button class="btn btn-light" id="sendAnother">
                                 <i class="fas fa-undo"></i> Send Another Message
                             </button>
@@ -2924,6 +3481,7 @@
                     </div>
                 </div>
             </div>
+
         </section>
 
 
@@ -2934,14 +3492,8 @@
                 <div class="footer-content-mega">
                     <div class="footer-column-mega">
                         <h3>ESA UoE</h3>
-                        <p>The Engineering Students Association at the University of Eldoret - Empowering the engineers of tomorrow through innovation, collaboration, and excellence since 2013.</p>
-                       <div class="social-links-mega">
-                            <a href="https://www.facebook.com/profile.php?id=61575201954261" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
-                            <a href="https://www.instagram.com/esa_uoe?igsh=MTZ5NzFoZWx4eGUzaw==" target="_blank"><i class="fab fa-instagram"></i></a>
-                            <a href="https://www.linkedin.com/in/engineering-students-association-00a577386?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
-                        </div>
+                        <p>The Engineering Students' Association at the University of Eldoret - Empowering the engineers of tomorrow through innovation, collaboration, and excellence since 2013.</p>
+
                     </div>
                     <div class="footer-column-mega">
                         <h3>Quick Links</h3>
@@ -2976,7 +3528,7 @@
                     </div>
                 </div>
                 <div class="footer-bottom-mega">
-                    <p>&copy; 2025 Engineering Students Association - University of Eldoret. All Rights Reserved. | Designed By <a href="https://mkcoder729.github.io/just-my-portfolio/" target="_blank" rel="noopener noreferrer" style="color: #e6b400; text-decoration: none; font-weight: 500; transition: text-decoration 0.3s ease;">Mukoya Khisa</a></p>
+                    <p>&copy; 2025 Engineering Students' Association - University of Eldoret. All Rights Reserved. | Developed By <a href="https://mkcoder729.github.io/just-my-portfolio/" target="_blank" rel="noopener noreferrer" style="color: #e6b400; text-decoration: none; font-weight: 500; transition: text-decoration 0.3s ease;">Mukoya Khisa</a></p>
                 </div>
             </div>
         </footer>
